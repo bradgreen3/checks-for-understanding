@@ -24,16 +24,18 @@ Instance variables.
 
 7. Given the following block of code, how would I pass an instance variable `count` with a value of `1` to my `index.erb` template?
   
-  ```ruby
+```ruby
   get '/horses' do
     erb :index
   end
-  ```
+```
 @count = 1
 
 8. In the same code block, how would I pass a local variable `name` with a value of `Mr. Ed`?
 
+```ruby
 locals => {:name => "Mr. Ed"}
+```
 
 9. What's the purpose of ERB?
 
@@ -57,8 +59,10 @@ Hyptertext transfer protocol
 
 14. What are the two ways to interpolate Ruby in an ERB view template? What's the difference between these two ways?
 
+```ruby
 <%= ruby code %>
 <% ruby code %>
+```
 
 The first inserts the value of a Ruby expression, while the second executes the code without inserting the return value.
 
@@ -72,52 +76,66 @@ For Ruby, Active Record is what we're using. It is based on the creation and man
 
 17. Let's say we have an application with restaurants. There are seven verb + path combinations necessary to provide full CRUD functionality for our restaurant application. List each of the seven combinations, and explain what each is for.
 
+```ruby
 get '/restaurants' do
   @restaurants = Restaurant.all
   erb: index
 end
+```
 
 The initial GET request returns the restaurant ERB index page
- 
+
+```ruby
 get '/restaurants/new' do
   erb :new
 end
+```
 
 A GET request is needed to send a user to a page to create a new restaurant
 
+```ruby
 post '/restaurants' do
   restaurant = Restaurant.new(params[:restaurant])
   restaurant.save
   redirect '/restaurant'
 end
+```
 
 When the new restaurant form is submitted, a POST request is sent where a new restaurant is created in the database and the user is redirected to the restaurant index page.
 
+```ruby
 get '/restaurant/:id' do
   @restaurant = Restaurant.find(params[:id])
   erb :show
 end
+```
 
 When navigating to a specific restaurant, a GET request displays the restaurant info.
 
+```ruby
 get '/restaurant/:id/edit' do
   @restaurant = Restaurant.find(params[:id])
   erb :edit
 end
+```
 
 When clicking an edit button or link, this GET request brings the user to an edit page to change its attributes
 
+```ruby
 put '/restaurant/:id' do |id|
   Restaurant.update(id.to_i, params[:restaurant])
   redirect "/restaurant/#{id}"
 end
+```
 
 PUT requests manipulate the data & update ths page
 
+```ruby
 delete '/restaurant/:id' do |id|
   Restaurant.destroy(id.to_i)
   redirect '/restaurant'
 end
+```
 
 DELETE requests delete data submitted from a button/link
 
